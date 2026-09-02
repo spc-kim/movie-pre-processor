@@ -1,17 +1,27 @@
-# Get our text parsing functions from other file and set keyword
+# Import the text parsing functions
 import text_parsing_functions as tpf
 
+
 if __name__ == '__main__':
-
-    # Set test arguments
+    # Load stopwords from file
     stopwords = tpf.load_stopwords('data/stopwords.txt')
-    name_set = set(['seokwoo', 'suan', 'seongkyeong', 'busan'])
-    replace_val = 'person'
 
-    # Open the example description file
-    with open('data/train_to_busan_description.txt', 'r') as file_obj:
-        sample_text = file_obj.read()
+    # Character names that should be replaced with 'person'
+    replace = 'person'
+    names = set(
+        ['suan', 'seongkyeong', 'yonsuk', 'seokwoo',
+         'ingil', 'yonghuk', 'jinhee']
+    )
 
-    # Run our pipeline and print it
-    cleaned_text = tpf.line_cleaning_pipeline(sample_text, stopwords, name_set, replace_val)
+    # Test the pipeline with a sample line
+    line_text = (
+      "pregnant wife Seong-kyeong, "
+      "a high school baseball team, "
+      "rich-yet-egotistical"
+    )
+    cleaned_text = tpf.line_cleaning_pipeline(line_text,
+                                              stopwords,
+                                              names,
+                                              replace)
+
     print(cleaned_text)
