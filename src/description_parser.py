@@ -1,1 +1,3 @@
-from text_parsing_functions import load_stopwords, line_cleaning_pipeline
+import text_parsing_functions as tpf
+
+stopwords = tpf.load_stopwords('data/stopwords.txt')
