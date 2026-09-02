@@ -2,10 +2,14 @@
 import text_parsing_functions as tpf
 
 
-def read_file_line_by_line(file_path):
+def clean_line_by_line(file_path, stopwords_set, name_set, replace_val):
+    cleaned_lines = []
     with open(file_path, 'r') as file_obj:
         for line in file_obj:
-            print(line.strip())
+            cleaned_line = tpf.line_cleaning_pipeline(line, stopwords_set, name_set, replace_val)
+            if cleaned_line:
+                cleaned_lines.append(cleaned_line)
+    return cleaned_lines
 
 if __name__ == '__main__':
     # Load stopwords from file
@@ -32,4 +36,6 @@ if __name__ == '__main__':
     print(cleaned_text)
 
     file_path = 'data/train_to_busan_description.txt'
-    read_file_line_by_line(file_path)
+    cleaned_line = clean_line_by_line(file_path, stopwords, names, replace)
+    for line in cleaned_line:
+        print(f"{line}")
